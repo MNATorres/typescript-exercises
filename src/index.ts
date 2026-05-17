@@ -1,16 +1,18 @@
+import "dotenv/config"; // Importante: Esto debe ir primero para cargar el .env
 import express from "express";
-// import { database } from './config/database.js';
+import { testDatabaseConnection } from "./config/database.js";
+import { ENV } from "./config/env.js";
 import { apiRouter } from "./routes/index.js";
 
 const app = express();
-const PORT = process.env["PORT"] || 3000;
+const PORT = ENV.PORT;
 
 app.use(express.json());
 
 async function bootstrap() {
   try {
-    // await database.connect();
-    // console.log('📁 Database connection successfully established.');
+    await testDatabaseConnection();
+    console.log('📁 Database connection successfully established.');
 
     // Aquí acoplaremos las rutas globales una vez que la DB esté lista
     app.use("/api", apiRouter);

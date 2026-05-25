@@ -9,6 +9,10 @@ const PORT = ENV.PORT;
 
 app.use(express.json());
 
+app.get("/", (_req, res) => {
+  res.send("bienvenidos a employees api");
+});
+
 async function bootstrap() {
   try {
     await testDatabaseConnection();

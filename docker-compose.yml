@@ -1,7 +1,7 @@
 services:
   db:
     image: mysql:8.0
-    container_name: typescript-exercises-mysql
+    container_name: employees-ms-db
     restart: always
     working_dir: /docker-entrypoint-initdb.d
     environment:
@@ -10,12 +10,12 @@ services:
       - "3306:3306"
     volumes:
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
-      - mysql_data:/var/lib/mysql
+      - employees_mysql_data:/var/lib/mysql
     command: --local-infile=1
 
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: typescript-exercises-pma
+    container_name: employees-ms-pma
     restart: always
     ports:
       - "8080:80" # Accederás vía http://localhost:8080
@@ -26,4 +26,4 @@ services:
       - db
 
 volumes:
-  mysql_data:
+  employees_mysql_data:
